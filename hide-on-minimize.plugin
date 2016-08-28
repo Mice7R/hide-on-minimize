@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python3
+Module=hide-on-minimize
+IAge=2
+Name=Hide On Minimize
+Description=Hide player on minimize when music is playing
+Authors=Mice7R <mice7r@gmail.com>
+Copyright=Copyright © 2016 Mice7R
+Website=
