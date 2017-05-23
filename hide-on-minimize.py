@@ -1,4 +1,4 @@
-# COPYRIGHT (c) 2016 mice7r <mice7r@gmail.com>
+# COPYRIGHT (c) 2016,2017 mice7r <mice7r@gmail.com>
 #
 # GNU GENERAL PUBLIC LICENSE
 #    Version 3, 29 June 2007
