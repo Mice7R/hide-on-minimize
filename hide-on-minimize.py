@@ -25,21 +25,27 @@ class HideOnMinimize(GObject.Object, Peas.Activatable):
 
     def do_activate(self):
         self.window = self.object.get_property("window")
-        self.handler_id = self.window.connect("window-state-event", self.state_event)
         self.shell = self.object
+        self.player = self.shell.props.shell_player
+
+        self.window_handler_id = self.window.connect("window-state-event", self.state_event)
+        self.player_handler_id = self.player.connect("playing-changed", self.playing_changed)
 
     def do_deactivate(self):
         self.window.show()
-        self.window.disconnect(self.handler_id)
+        self.window.disconnect(self.window_handler_id)
+        self.player.disconnect(self.player_handler_id)
+
+    def playing_changed(self, player, playing):
+        if not playing:
+            self.window.show()
+            self.window.deiconify()
 
     def state_event(self, widget, event):
-        player = self.shell.props.shell_player
         widget_state = widget.get_window().get_state()
 
         # minimized and playing
-        if widget_state == 2 and\
-            (lambda x: x[0] and x[1])(player.get_playing()):
-            # get_playing() returns a pair .... only god knows why.
+        if widget_state == 2 and self.player.props.playing:
             self.window.hide()
 
         return True
